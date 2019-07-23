@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Restaurants Database</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Restaurants</h1>
+    <ul>
+        {% for restaurant in restaurants %}
+        <li>
+            {{ restaurant.name }}
+            <a href="/{{restaurant.id}}/edit">Edit</a>
+            <a href="/{{restaurant.id}}/delete">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/new" class="add_new">Add new restaurant</a>
+</div>
+{% endblock %}
