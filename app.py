@@ -13,6 +13,14 @@ class Restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
 
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
+
 
 class MenuItem(db.Model):
     __tablename__ = 'menu_item'
@@ -35,6 +43,8 @@ class MenuItem(db.Model):
             'course': self.course
         }
 
+
+# ========================= Restaurants Part
 
 @app.route('/')
 @app.route('/restaurants')
@@ -96,6 +106,15 @@ def edit(id):
     else:
         return render_template('edit.html', restaurant=restaurant_to_edit)
 
+
+@app.route('/restaurants/JSON')
+def restaurants_json():
+    restaurants_to_json = Restaurant.query.all()
+
+    return jsonify(restaurants=[rest.serialize for rest in restaurants_to_json])
+
+
+# ========================= Menu Part
 
 @app.route('/restaurants/<int:restaurant_id>/menu')
 def menu(restaurant_id):
