@@ -2,14 +2,26 @@
     margin-left: 20px;
 }
 
-li {
+.rest_list li {
     font-size: 30px;
 }
 
-li a {
+.rest_list li a {
     font-size: 20px;
 }
 
 .add_new {
    font-size: 30px; 
+}
+
+a {
+    text-decoration: none;
+}
+
+.menu li {
+    list-style: none;
+}
+
+.messages li {
+    list-style: 
 }
