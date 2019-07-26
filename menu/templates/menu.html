@@ -7,10 +7,21 @@
 {% block body %}
 <div class="content">
     <h1>{{ restaurant.name }}</h1>
-    <ul>
+    
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li><h2>{{ message }}</h2></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        {% endwith %}
+    
+    <ul class="menu">
         {% for item in menu_items %}
         <li>
-            <p>{{ item.name }}</p>
+            <h3>{{ item.name }}</h3>
             <p>{{ item.description }}</p>
             <p>{{ item.price }}</p>
             <a href="/restaurants/{{restaurant.id}}/edit/{{item.id}}">Edit</a>
@@ -19,6 +30,7 @@
         </li>
         {% endfor %}
     </ul>
-    <a href="#" class="to_main">Return to restaurants list</a>
+    <h2><a href="/restaurants/{{restaurant.id}}/new_menu_item">Add new menu item</a></h2>
+    <h2><a href="#" class="to_main">Return to restaurants list</a></h2>
 </div>
 {% endblock %}
